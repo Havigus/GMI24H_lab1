@@ -12,12 +12,11 @@
             }
             //Calls Task1
             Deluppgift1.Deluppgift1Func(input, 5, 20);
-
         }
-
     }
 }
 
+//Klass för att lösa första deluppgiften
 public class Deluppgift1
 {
     public static void Deluppgift1Func(int[] input, int number, int numberOfItterations)
@@ -25,17 +24,18 @@ public class Deluppgift1
         using var writer = new StreamWriter("deluppgift1.csv", true);
         for (int i = 0; i < numberOfItterations; i++)
         {
-            DateTime start = DateTime.Now;
-            int count = Deluppgift1Alg(input, number);
-            DateTime end = DateTime.Now;
+            var sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
+            int count = Deluppgift1Algoritm(input, number);
+            sw.Stop();
             Console.WriteLine(count);
-            Console.WriteLine(end - start);
-            writer.WriteLine($"{input.Length};{end - start}");
-
+            Console.WriteLine(sw.Elapsed);
+            writer.WriteLine($"{input.Length},{sw.Elapsed}");
+            sw.Reset();
         }
     }
 
-    static int Deluppgift1Alg(int[] input, int number)
+    static int Deluppgift1Algoritm(int[] input, int number)
     {
         int seen = 0; //O(1)
         foreach (var num in input) //O(n)
@@ -48,6 +48,3 @@ public class Deluppgift1
         return seen; //O(1)
     }
 }
-
-
-
