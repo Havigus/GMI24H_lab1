@@ -10,11 +10,11 @@
 }
 
 //Klass för att lösa första deluppgiften
-public class Deluppgift1
+class Deluppgift1
 {
     public static void Deluppgift1Func(int number, int numberOfIterations)
     {
-        using var writer = new StreamWriter("deluppgift1.csv", true);
+        using var writer = new StreamWriter("deluppgift1.csv");
         var sw = new System.Diagnostics.Stopwatch();
         Random random = new Random(1);
 
@@ -57,7 +57,7 @@ class Deluppgift2
     public static void Deluppgift2Func(int numberOfIterations)
     {
         var sw = new System.Diagnostics.Stopwatch();
-        using var writer = new StreamWriter("deluppgift2.csv", true);
+        using var writer = new StreamWriter("deluppgift2.csv");
         Random random = new Random(1);
 
         for (int i = 1; i < numberOfIterations; i++)
@@ -144,11 +144,14 @@ class Deluppgift2
         int i = 0; //O(1)
         while (i < n) //O(n)
         {
-            arr[i] = arr[n - 1] ^ arr[i]; //O(1)
-            arr[n - 1] = arr[n - 1] ^ arr[i]; //O(1)
-            arr[i] = arr[n - 1] ^ arr[i]; //O(1)
-            i++; //O(1)
-            n--; //O(1)
+            if (i != n - 1) //O(1)
+            {
+                arr[i] = arr[n - 1] ^ arr[i]; //O(1)
+                arr[n - 1] = arr[n - 1] ^ arr[i]; //O(1)
+                arr[i] = arr[n - 1] ^ arr[i]; //O(1)
+                i++; //O(1)
+                n--; //O(1)
+            }
         }
         return arr; //O(1)
     }
