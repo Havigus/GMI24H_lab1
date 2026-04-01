@@ -149,9 +149,9 @@ class Deluppgift2
                 arr[i] = arr[n - 1] ^ arr[i]; //O(1)
                 arr[n - 1] = arr[n - 1] ^ arr[i]; //O(1)
                 arr[i] = arr[n - 1] ^ arr[i]; //O(1)
-                i++; //O(1)
-                n--; //O(1)
             }
+            i++; //O(1)
+            n--; //O(1)
         }
         return arr; //O(1)
     }
