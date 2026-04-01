@@ -3,7 +3,7 @@
     static void Main(string[] args)
     {
         //Kallar på Deluppgift1
-        // Deluppgift1.Deluppgift1Func(5, 20);
+        Deluppgift1.Deluppgift1Func(5, 20);
         // Kallar på Deluppgift2
         Deluppgift2.Deluppgift2Func(20);
     }
@@ -25,15 +25,18 @@ class Deluppgift1
             {
                 input[j] = random.Next(1, 20);
             }
+            //Kör varje arraysize 10 gånger för att minska "noise"
+            for (int r = 0; r < 10; r++)
+            {
+                sw.Start();
+                int count = Deluppgift1Algoritm(input, number);
+                sw.Stop();
 
-            sw.Start();
-            int count = Deluppgift1Algoritm(input, number);
-            sw.Stop();
-
-            Console.WriteLine(count);
-            Console.WriteLine(sw.Elapsed);
-            writer.WriteLine($"{input.Length},{sw.Elapsed}");
-            sw.Reset();
+                Console.WriteLine(count);
+                Console.WriteLine(sw.Elapsed);
+                writer.WriteLine($"{input.Length},{sw.Elapsed}");
+                sw.Reset();
+            }
         }
     }
 
@@ -69,35 +72,41 @@ class Deluppgift2
             }
             Console.WriteLine(string.Join(",", input[..3].Concat(input[^3..])));
 
-            //ReverseA Algoritmen
-            var inputCloneA = (int[])input.Clone();
-            sw.Start();
-            var reversedArrA = ReverseA(inputCloneA, input.Length);
-            sw.Stop();
-            Console.WriteLine(string.Join(",", reversedArrA[..3].Concat(reversedArrA[^3..])));
-            Console.WriteLine($"ReverseA: {sw.Elapsed}");
-            writer.WriteLine($"ReverseA,{input.Length},{sw.Elapsed}");
-            sw.Reset();
+            //Kör varje arraysize 10 gånger för att minska "noise"
+            for (int r = 0; r < 10; r++)
+            {
+                //ReverseA Algoritmen
+                var inputCloneA = (int[])input.Clone();
+                sw.Start();
+                var reversedArrA = ReverseA(inputCloneA, input.Length);
+                sw.Stop();
+                Console.WriteLine(string.Join(",", reversedArrA[..3].Concat(reversedArrA[^3..])));
+                Console.WriteLine($"ReverseA: {sw.Elapsed}");
+                writer.WriteLine($"ReverseA,{input.Length},{sw.Elapsed}");
+                sw.Reset();
 
-            //ReverseB Algoritmen
-            var inputCloneB = (int[])input.Clone();
-            sw.Start();
-            var reversedArrB = ReverseB(inputCloneB, input.Length);
-            sw.Stop();
-            Console.WriteLine(string.Join(",", reversedArrB[..3].Concat(reversedArrB[^3..])));
-            Console.WriteLine($"ReverseB: {sw.Elapsed}");
-            writer.WriteLine($"ReverseB,{input.Length},{sw.Elapsed}");
-            sw.Reset();
+                //ReverseB Algoritmen
+                var inputCloneB = (int[])input.Clone();
+                sw.Start();
+                var reversedArrB = ReverseB(inputCloneB, input.Length);
+                sw.Stop();
+                Console.WriteLine(string.Join(",", reversedArrB[..3].Concat(reversedArrB[^3..])));
+                Console.WriteLine($"ReverseB: {sw.Elapsed}");
+                writer.WriteLine($"ReverseB,{input.Length},{sw.Elapsed}");
+                sw.Reset();
 
-            //ReverseXor Algoritmen
-            var inputCloneXor = (int[])input.Clone();
-            sw.Start();
-            var reversedArrXor = ReverseXor(inputCloneXor, input.Length);
-            sw.Stop();
-            Console.WriteLine(string.Join(",", reversedArrXor[..3].Concat(reversedArrXor[^3..])));
-            Console.WriteLine($"ReverseXor: {sw.Elapsed}");
-            writer.WriteLine($"ReverseXor,{input.Length},{sw.Elapsed}");
-            sw.Reset();
+                //ReverseXor Algoritmen
+                var inputCloneXor = (int[])input.Clone();
+                sw.Start();
+                var reversedArrXor = ReverseXor(inputCloneXor, input.Length);
+                sw.Stop();
+                Console.WriteLine(
+                    string.Join(",", reversedArrXor[..3].Concat(reversedArrXor[^3..]))
+                );
+                Console.WriteLine($"ReverseXor: {sw.Elapsed}");
+                writer.WriteLine($"ReverseXor,{input.Length},{sw.Elapsed}");
+                sw.Reset();
+            }
         }
     }
 
