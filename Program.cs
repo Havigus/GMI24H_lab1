@@ -159,14 +159,13 @@ public class Deluppgift2
         return ($"{algorithm.Method.Name},{input.Length},{sw.Elapsed}");
     }
 
-    //Algoritmen som vi fick från Deluppgiften
     /// <summary>
     /// Algoritmen ReverseA som vi fick i uppgiften, som vänder en array genom att flytta varje element till början av arrayen
     /// </summary>
     /// <param name="arr">Array som ska vändas</param>
     /// <param name="n">Antal element i arrayen</param>
     /// <returns>Omvänd array</returns>
-    static int[] ReverseA(int[] arr, int n)
+    public static int[] ReverseA(int[] arr, int n)
     {
         int i = 1; //O(1)
 
@@ -196,14 +195,13 @@ public class Deluppgift2
         return arr; //O(1)
     }
 
-    //Algoritmen som vi implementerade
     /// <summary>
     /// Algoritmen ReverseB som vi implementerade, som vänder en array genom att byta plats på element i början och slutet
     /// </summary>
     /// <param name="arr">Array som ska vändas</param>
     /// <param name="n">Antal element i arrayen</param>
     /// <returns>Omvänd array</returns>
-    static int[] ReverseB(int[] arr, int n)
+    public static int[] ReverseB(int[] arr, int n)
     {
         // Börja på index 0
         int i = 0; //O(1)
