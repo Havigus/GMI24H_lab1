@@ -10,7 +10,7 @@
 }
 
 //Klass för att lösa första deluppgiften
-class Deluppgift1
+public class Deluppgift1
 {
     public static void Deluppgift1Func(int number, int numberOfIterations)
     {
@@ -62,7 +62,7 @@ class Deluppgift1
 }
 
 //Klass för att lösa Deluppgift2 alternativ 2
-class Deluppgift2
+public class Deluppgift2
 {
     public static void Deluppgift2Func(int numberOfIterations)
     {
@@ -110,7 +110,7 @@ class Deluppgift2
     }
 
     //Algoritmen som vi fick från Deluppgiften
-    static int[] ReverseA(int[] arr, int n)
+    public static int[] ReverseA(int[] arr, int n)
     {
         int i = 1; //O(1)
 
@@ -132,7 +132,7 @@ class Deluppgift2
     }
 
     //Algoritmen som vi implementerade
-    static int[] ReverseB(int[] arr, int n)
+    public static int[] ReverseB(int[] arr, int n)
     {
         int i = 0; //O(1)
         while (i < n) //O(n)
