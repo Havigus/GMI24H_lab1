@@ -2,10 +2,10 @@
 {
     static void Main(string[] args)
     {
-        //Kallar på Deluppgift1
-        Deluppgift1.Deluppgift1Func(5, 20);
+        // Kallar på Deluppgift1
+        // Deluppgift1.Deluppgift1Func(5, 20);
         // Kallar på Deluppgift2
-        Deluppgift2.Deluppgift2Func(20);
+        Deluppgift2.Deluppgift2Func(10);
     }
 }
 
@@ -14,7 +14,10 @@ class Deluppgift1
 {
     public static void Deluppgift1Func(int number, int numberOfIterations)
     {
+        numberOfIterations = Math.Abs(numberOfIterations);
+
         using var writer = new StreamWriter("deluppgift1.csv");
+        List<string> resultStrings = new List<string>();
         var sw = new System.Diagnostics.Stopwatch();
         Random random = new Random(1);
 
@@ -25,6 +28,8 @@ class Deluppgift1
             {
                 input[j] = random.Next(1, 20);
             }
+            //TODO: Borde vi lägga till chache clear?
+
             //Kör varje arraysize 10 gånger för att minska "noise"
             for (int r = 0; r < 10; r++)
             {
@@ -34,13 +39,15 @@ class Deluppgift1
 
                 Console.WriteLine(count);
                 Console.WriteLine(sw.Elapsed);
-                writer.WriteLine($"{input.Length},{sw.Elapsed}");
+                resultStrings.Add($"{input.Length},{sw.Elapsed}");
                 sw.Reset();
             }
         }
+        writer.WriteLine(string.Join("\n", resultStrings));
+        writer.Close();
     }
 
-    static int Deluppgift1Algoritm(int[] input, int number)
+    public static int Deluppgift1Algoritm(int[] input, int number)
     {
         int seen = 0; //O(1)
         foreach (var num in input) //O(n)
@@ -59,55 +66,47 @@ class Deluppgift2
 {
     public static void Deluppgift2Func(int numberOfIterations)
     {
-        var sw = new System.Diagnostics.Stopwatch();
+        numberOfIterations = Math.Abs(numberOfIterations);
+
         using var writer = new StreamWriter("deluppgift2.csv");
+        List<string> resultStrings = new List<string>();
         Random random = new Random(1);
 
         for (int i = 1; i < numberOfIterations; i++)
         {
-            int[] input = new int[i * 1000];
+            Console.WriteLine($"Iteration: {i}");
+            int[] input = new int[i * i * 1000];
             for (int j = 0; j < input.Length; j++)
             {
                 input[j] = random.Next(1, 20);
             }
             Console.WriteLine(string.Join(",", input[..3].Concat(input[^3..])));
 
+            //TODO: Borde vi lägga till chache clear?
+
             //Kör varje arraysize 10 gånger för att minska "noise"
             for (int r = 0; r < 10; r++)
             {
-                //ReverseA Algoritmen
-                var inputCloneA = (int[])input.Clone();
-                sw.Start();
-                var reversedArrA = ReverseA(inputCloneA, input.Length);
-                sw.Stop();
-                Console.WriteLine(string.Join(",", reversedArrA[..3].Concat(reversedArrA[^3..])));
-                Console.WriteLine($"ReverseA: {sw.Elapsed}");
-                writer.WriteLine($"ReverseA,{input.Length},{sw.Elapsed}");
-                sw.Reset();
-
-                //ReverseB Algoritmen
-                var inputCloneB = (int[])input.Clone();
-                sw.Start();
-                var reversedArrB = ReverseB(inputCloneB, input.Length);
-                sw.Stop();
-                Console.WriteLine(string.Join(",", reversedArrB[..3].Concat(reversedArrB[^3..])));
-                Console.WriteLine($"ReverseB: {sw.Elapsed}");
-                writer.WriteLine($"ReverseB,{input.Length},{sw.Elapsed}");
-                sw.Reset();
-
-                //ReverseXor Algoritmen
-                var inputCloneXor = (int[])input.Clone();
-                sw.Start();
-                var reversedArrXor = ReverseXor(inputCloneXor, input.Length);
-                sw.Stop();
-                Console.WriteLine(
-                    string.Join(",", reversedArrXor[..3].Concat(reversedArrXor[^3..]))
-                );
-                Console.WriteLine($"ReverseXor: {sw.Elapsed}");
-                writer.WriteLine($"ReverseXor,{input.Length},{sw.Elapsed}");
-                sw.Reset();
+                resultStrings.Add(BenchmarkAlgorithm(input, ReverseA));
+                resultStrings.Add(BenchmarkAlgorithm(input, ReverseB));
             }
         }
+        writer.WriteLine(string.Join("\n", resultStrings));
+        writer.Close();
+    }
+
+    static string BenchmarkAlgorithm(int[] input, Func<int[], int, int[]> algorithm)
+    {
+        var sw = new System.Diagnostics.Stopwatch();
+        var clone = (int[])input.Clone();
+        sw.Start();
+        var result = algorithm(clone, input.Length);
+        sw.Stop();
+
+        Console.WriteLine(string.Join(",", result[..3].Concat(result[^3..])));
+        Console.WriteLine($"{algorithm.Method.Name}: {sw.Elapsed}");
+
+        return ($"{algorithm.Method.Name},{input.Length},{sw.Elapsed}");
     }
 
     //Algoritmen som vi fick från Deluppgiften
@@ -141,24 +140,6 @@ class Deluppgift2
             var nextValue = arr[i]; //O(1)
             arr[i] = arr[n - 1]; //O(1)
             arr[n - 1] = nextValue; //O(1)
-            i++; //O(1)
-            n--; //O(1)
-        }
-        return arr; //O(1)
-    }
-
-    //Xor swap bara för att se skillnaden mot tmp variable
-    static int[] ReverseXor(int[] arr, int n)
-    {
-        int i = 0; //O(1)
-        while (i < n) //O(n)
-        {
-            if (i != n - 1) //O(1)
-            {
-                arr[i] = arr[n - 1] ^ arr[i]; //O(1)
-                arr[n - 1] = arr[n - 1] ^ arr[i]; //O(1)
-                arr[i] = arr[n - 1] ^ arr[i]; //O(1)
-            }
             i++; //O(1)
             n--; //O(1)
         }
