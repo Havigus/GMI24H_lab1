@@ -1,0 +1,17 @@
+# Build output
+bin/
+obj/
+
+# BenchmarkDotNet results
+BenchmarkDotNet.Artifacts/
+
+# IDE
+.idea/
+.vs/
+*.user
+
+# CSV benchmark output
+*.csv
+
+# OS
+.DS_Store

@@ -112,7 +112,7 @@ public class Deluppgift2
             Console.WriteLine($"Iteration: {i}");
 
             // Skapa en array av storleken i * i * 1000, vilket gör att arrayen växer med n^2 * 1000
-            int[] input = new int[i * i * 1000];
+            int[] input = new int[i * i * 10000];
 
             // Loopa igenom arrayen och fyll den med random numbers mellan 1 och 19 (20 - 1)
             for (int j = 0; j < input.Length; j++)
