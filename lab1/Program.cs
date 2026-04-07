@@ -30,7 +30,7 @@ public class Deluppgift1
         // Sätter seed till 1 för att få samma random numbers varje gång
         Random random = new Random(1);
 
-        // Kör algoritmen numberOfIterations gånger
+        // Kör algoritmen numberOfIterations - 1 gånger
         for (int i = 1; i < numberOfIterations; i++)
         {
             // Skapa en array av storleken i * 100000
@@ -72,7 +72,7 @@ public class Deluppgift1
     /// <returns></returns>
     public static int GetOccurences(int[] input, int number)
     {
-        // Reäkna förekomster av number i input arrayen
+        // Räkna förekomster av number i input arrayen
         // Detta görs genom att iterera över arrayen och öka en räknare varje gång number hittas.
         int seen = 0; //O(1)
 
@@ -106,12 +106,12 @@ public class Deluppgift2
         // Sätter seed till 1 för att få samma random numbers varje gång
         Random random = new Random(1);
 
-        // Loopa antal iterationer gånger
+        // Loopa antal iterationer - 1 gånger
         for (int i = 1; i < numberOfIterations; i++)
         {
             Console.WriteLine($"Iteration: {i}");
 
-            // Skapa en array av storleken i * i * 1000, vilket gör att arrayen växer med n^2 * 1000
+            // Skapa en array av storleken i * i * 10000, vilket gör att arrayen växer med n^2 * 1000
             int[] input = new int[i * i * 10000];
 
             // Loopa igenom arrayen och fyll den med random numbers mellan 1 och 19 (20 - 1)
